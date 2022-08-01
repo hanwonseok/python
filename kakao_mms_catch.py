@@ -1,15 +1,24 @@
 from asyncio.windows_events import NULL
 from cmath import e
-import time, win32con, win32api, win32gui, ctypes
+import time
+import logging
+
+import win32con, win32api, win32gui, ctypes
+#win32 모듈 설치필요 -> pip install pypiwin32
 import requests
+#requests 모듈 설치필요 -> pip install requests
 from bs4 import BeautifulSoup
+#BeautifulSoup 모듈 설치필요 -> pip install beautifulsoup4
 from apscheduler.schedulers.background import BackgroundScheduler
+#BackgroundScheduler 모듈 설치필요 -> pip install apscheduler
 from pywinauto import clipboard # 채팅창내용 가져오기 위해
+#clipboard 모듈 설치 필요 -> pip install pywinauto
 import pandas as pd # 가져온 채팅내용 DF로 쓸거라서
+#pandas 모듈 설치 필요 -> pip install pandas
 
 
 # # 카톡창 이름, (활성화 상태의 열려있는 창)
-kakao_opentalk_name = '한원석'
+kakao_opentalk_name = '나여~'
 chat_command = '입금'  # 테스트용..
 
 PBYTE256 = ctypes.c_ubyte * 256
@@ -129,8 +138,8 @@ def open_chatroom(chatroom_name):
     # # Edit에 검색 _ 입력되어있는 텍스트가 있어도 덮어쓰기됨
     win32api.SendMessage(hwndkakao_edit3, win32con.WM_SETTEXT, 0, chatroom_name)
     time.sleep(1)   # 안정성 위해 필요
-    SendReturn(hwndkakao_edit3)
-    time.sleep(1)
+    #SendReturn(hwndkakao_edit3)
+    #time.sleep(1)
 
 
 # # 채팅내용 초기 저장 _ 마지막 채팅
@@ -169,7 +178,8 @@ def chat_chek_command(cls, clst):
         a = ttext.split('\r\n')  # \r\n 으로 스플릿 __ 대화내용 인용의 경우 \r 때문에 해당안됨
         df = pd.DataFrame(a)  # DF 으로 바꾸기
 
-        df[0] = df[0].str.replace('\[([\S\s]+)\] \[(오전|오후)([0-9:\s]+)\] ', '')  # 정규식으로 채팅내용만 남기기
+        print(df)
+        #df[0] = df[0].str.replace('\[([\S\s]+)\] \[(오전|오후)([0-9:\s]+)\] ', '')  # 정규식으로 채팅내용만 남기기
 
         if df.iloc[-2, 0] == clst:
             print("채팅 없었음..")
