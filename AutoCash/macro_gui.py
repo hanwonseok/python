@@ -1,6 +1,8 @@
 import global_variable as g
 import tkinter
 
+mainFrom = tkinter.Tk()
+
 #구성된 UI로 화면은 표시한다
 def show():
     print('-show-시작-------------------------------------------------------')
@@ -16,16 +18,15 @@ def show():
         
 #메인 화면 설정
 def Init_mainFrom():
-    mainFrom = tkinter.Tk()
     mainFrom.wm_title('AutoCash')
     mainFrom.geometry('600x800')
 
-    Init_ctrl(mainFrom)
+    Init_ctrl()
     
     mainFrom.mainloop()
 
 #컨트롤들 초기화
-def Init_ctrl(mainFrom):
+def Init_ctrl():
     canvas = tkinter.Canvas(mainFrom, width=590, height=790, bg="white")
     canvas.pack(padx=5,pady=5)
     for i in range(0, 601, 10):
@@ -39,7 +40,7 @@ def Init_ctrl(mainFrom):
 
 
 #텍스트박스 초기화
-def Init_RoomTitle_Ctrl(mainFrom):
+def Init_RoomTitle_Ctrl():
     x_location = 50
     
     lbl_RoomTitle = tkinter.Label(mainFrom, text="톡방명")
@@ -50,13 +51,15 @@ def Init_RoomTitle_Ctrl(mainFrom):
 
 
 #버튼 초기화
-def Init_btnSetting(mainFrom):
-    btn_start = tkinter.Button(mainFrom, text="구동시작")
+def Init_btnSetting():
+    btn_start = tkinter.Button(mainFrom, command=btn_start_click, text="구동시작")
     btn_start.place(x=500, y=20)
     
-    btn_end = tkinter.Button(mainFrom, text="구동종료")
+    btn_end = tkinter.Button(mainFrom, text="구동종료", disable=True)
     btn_end.place(x=500, y=60)
 
+def btn_start_click():
+    print('출력함')
 
 if __name__ == '__main__':
     show();

@@ -15,3 +15,4 @@ from pywinauto import clipboard # 채팅창내용 가져오기 위해
 #clipboard 모듈 설치 필요 -> pip install pywinauto
 import pandas as pd # 가져온 채팅내용 DF로 쓸거라서
 #pandas 모듈 설치 필요 -> pip install pandas
+
